@@ -585,7 +585,7 @@ void TP_Dialog(void)
                      "CLEAR", &Font16, RED, BLUE);
     //adjustment
     GUI_DisString_EN(sLCD_DIS.LCD_Dis_Column - 120, 0,
-                     "AD", &Font24, RED, BLUE);
+                     "AD", &Font16, RED, BLUE);
     //choose the color
     GUI_DrawRectangle(sLCD_DIS.LCD_Dis_Column - 50, 20,
                       sLCD_DIS.LCD_Dis_Column, 70,
@@ -607,7 +607,7 @@ void TP_Dialog(void)
     GUI_DisString_EN(sLCD_DIS.LCD_Dis_Column - 60, 0,
                      "CLEAR", &Font16, RED, BLUE);
     GUI_DisString_EN(sLCD_DIS.LCD_Dis_Column - 120, 0,
-                     "AD", &Font24, RED, BLUE);
+                     "AD", &Font16, RED, BLUE);
     GUI_DrawRectangle(20, 20, 70, 70, BLUE, DRAW_FULL, DOT_PIXEL_1X1);
     GUI_DrawRectangle(80, 20, 130, 70, GREEN, DRAW_FULL, DOT_PIXEL_1X1);
     GUI_DrawRectangle(140, 20, 190, 70, RED, DRAW_FULL, DOT_PIXEL_1X1);

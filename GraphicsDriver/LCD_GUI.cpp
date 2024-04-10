@@ -433,23 +433,26 @@ void GUI_DisGrayMap(POINT Xpoint, POINT Ypoint, const unsigned char *pBmp)
 sFONT *GUI_GetFontSize(POINT Dx, POINT Dy)
 {
   sFONT *Font = NULL;
-  if (Dx > Font24.Width && Dy > Font24.Height) {
-    Font = &Font24;
-  } else if ((Dx > Font20.Width && Dx < Font24.Width) &&
-             (Dy > Font20.Height && Dy < Font24.Height)) {
-    Font = &Font20;
-  } else if ((Dx > Font16.Width && Dx < Font20.Width) &&
-             (Dy > Font16.Height && Dy < Font20.Height)) {
-    Font = &Font16;
-  } else if ((Dx > Font12.Width && Dx < Font16.Width) &&
-             (Dy > Font12.Height && Dy < Font16.Height)) {
-    Font = &Font12;
-  } else if ((Dx > Font8.Width && Dx < Font12.Width) &&
-             (Dy > Font8.Height && Dy < Font12.Height)) {
-    Font = &Font8;
-  } else {
-    DEBUG("Please change the display area size, or add a larger font to modify\r\n");
-  }
+  Font = &Font16;
+
+  // if (Dx > Font24.Width && Dy > Font24.Height) {
+  //   Font = &Font24;
+  // } else if ((Dx > Font20.Width && Dx < Font24.Width) &&
+  //            (Dy > Font20.Height && Dy < Font24.Height)) {
+  //   Font = &Font20;
+  // } else if ((Dx > Font16.Width && Dx < Font20.Width) &&
+  //            (Dy > Font16.Height && Dy < Font20.Height)) {
+  //   Font = &Font16;
+  // } else if ((Dx > Font12.Width && Dx < Font16.Width) &&
+  //            (Dy > Font12.Height && Dy < Font16.Height)) {
+  //   Font = &Font12;
+  // } else if ((Dx > Font8.Width && Dx < Font12.Width) &&
+  //            (Dy > Font8.Height && Dy < Font12.Height)) {
+  //   Font = &Font8;
+  // } else {
+  //   DEBUG("Please change the display area size, or add a larger font to modify\r\n");
+  // }
+
   return Font;
 }
 /******************************************************************************
@@ -559,8 +562,8 @@ void GUI_Show(void)
     GUI_DrawCircle(sLCD_DIS.LCD_Dis_Column - 50, 250, 30, CYAN, DRAW_FULL, DOT_PIXEL_DFT);
 
     DEBUG("Display String\r\n");
-    GUI_DisString_EN(80, 80, "WaveShare Electronic", &Font24, LCD_BACKGROUND, BLUE);
-    GUI_DisString_EN(80, 120, "3.5inch TFTLCD", &Font20, RED, BLUE);
+    GUI_DisString_EN(80, 80, "WaveShare Electronic", &Font16, LCD_BACKGROUND, BLUE);
+    GUI_DisString_EN(80, 120, "3.5inch TFTLCD", &Font16, RED, BLUE);
 
     DEBUG("Display Nummber\r\n");
     GUI_DisNum(80, 150, 1234567890, &Font16, LCD_BACKGROUND, BLUE);
@@ -595,8 +598,8 @@ void GUI_Show(void)
     GUI_DrawCircle(sLCD_DIS.LCD_Dis_Column - 50, 400, 30, CYAN, DRAW_FULL, DOT_PIXEL_DFT);
 
     DEBUG("Display String\r\n");
-    GUI_DisString_EN(40, 120, "WaveShare Electronic", &Font24, LCD_BACKGROUND, BLUE);
-    GUI_DisString_EN(40, 180, "3.5inch TFTLCD", &Font20, RED, BLUE);
+    GUI_DisString_EN(40, 120, "WaveShare Electronic", &Font16, LCD_BACKGROUND, BLUE);
+    GUI_DisString_EN(40, 180, "3.5inch TFTLCD", &Font16, RED, BLUE);
 
     DEBUG("Display Nummber\r\n");
     GUI_DisNum(40, 210, 1234567890, &Font16, LCD_BACKGROUND, BLUE);
