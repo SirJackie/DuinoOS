@@ -21,6 +21,9 @@ uint8_t System_Init(void)
   pinMode(LCD_RST, OUTPUT);
   pinMode(LCD_DC, OUTPUT);
   pinMode(LCD_BL,OUTPUT);
+  pinMode(TP_CS, OUTPUT);
+  pinMode(TP_IRQ, INPUT);
+  digitalWrite(TP_IRQ, HIGH);
 
   //set Serial
   Serial.begin(115200);
@@ -34,7 +37,8 @@ uint8_t System_Init(void)
 }
 
 void PWM_SetValue(uint16_t value)
-{        
+{
+    pinMode(LCD_BL, OUTPUT);
     analogWrite(LCD_BL, value);
 }
 

@@ -262,6 +262,8 @@ void LCD_Init(LCD_SCAN_DIR LCD_ScanDir, uint16_t LCD_BLval)
     //Hardware reset
     LCD_Reset();
 
+    if(LCD_BLval > 255)
+        LCD_BLval = 255;
     LCD_SetBackLight(LCD_BLval);
 
     //Set the initialization register
