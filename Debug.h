@@ -15,7 +15,7 @@
 #define __DEBUG_H
 #include <Wire.h>
 
-#define DEV_DEBUG 1
+#define DEV_DEBUG 0
 #if DEV_DEBUG
 	#define DEBUG(__info) Serial.print(__info)
 #else

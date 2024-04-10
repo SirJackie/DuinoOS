@@ -39,6 +39,23 @@ void PWM_SetValue(uint16_t value)
 }
 
 /********************************************************************************
+  function:    Hardware interface
+  note:
+    SPI4W_Write_Byte(value) :
+        hardware SPI
+    I2C_Write_Byte(value, cmd):
+        hardware I2C
+********************************************************************************/
+void SPI4W_Write_Byte(uint8_t DATA)
+{
+  SPI.transfer(DATA);
+}
+uint8_t SPI4W_Read_Byte(uint8_t DATA)
+{
+  return SPI.transfer(DATA);
+}
+
+/********************************************************************************
   function:    Delay function
   note:
     Driver_Delay_ms(xms) : Delay x ms
