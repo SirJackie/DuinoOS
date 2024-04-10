@@ -48,9 +48,10 @@
 #define TP_BUSY 6
 #define GET_TP_BUSY    digitalRead(TP_BUSY)
 
-// Fast RW
-#define SPI4W_Write_Byte(__DATA) SPI.transfer(__DATA)
-#define SPI4W_Read_Byte(__DATA) SPI.transfer(__DATA)
+// // NON COMPILABLE
+// #define SPI4W_Write_Byte(__DATA) SPI.transfer(__DATA)
+// #define SPI4W_Read_Byte(__DATA) SPI.transfer(__DATA)
+
 /*------------------------------------------------------------------------------------------------------*/
 uint8_t System_Init(void);
 void PWM_SetValue(uint16_t value);
