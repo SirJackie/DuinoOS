@@ -1,7 +1,7 @@
-#include "DEV_Config.h"
-#include "LCD_Driver.h"
-#include "LCD_GUI.h"
-#include "LCD_Bmp.h"
+#include "GraphicsDriver/DEV_Config.h"
+#include "GraphicsDriver/LCD_Driver.h"
+#include "GraphicsDriver/LCD_GUI.h"
+#include "GraphicsDriver/LCD_Bmp.h"
 
 void setup()
 {
@@ -29,4 +29,3 @@ void loop()
 /*********************************************************************************************************
   END FILE
 *********************************************************************************************************/
-
