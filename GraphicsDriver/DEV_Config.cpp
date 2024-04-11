@@ -26,7 +26,7 @@ uint8_t System_Init(void)
   digitalWrite(TP_IRQ, HIGH);
 
   //set Serial
-  Serial.begin(115200);
+  // Serial.begin(115200);
   
   SPI.setDataMode(SPI_MODE0);
   SPI.setBitOrder(MSBFIRST);
