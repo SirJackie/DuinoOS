@@ -67,17 +67,17 @@ void Demo3_Setup()
 {
   System_Init();
 
-  Serial.println("3.5inch TFT Touch Shield Touch Demo");
-  Serial.println("Init...");
+  // Serial.println("3.5inch TFT Touch Shield Touch Demo");
+  // Serial.println("Init...");
   LCD_SCAN_DIR Lcd_ScanDir = SCAN_DIR_DFT;    //SCAN_DIR_DFT = D2U_L2R
   LCD_Init( Lcd_ScanDir, 200);  
 
-  Serial.println("Init Touch Pad...");
+  // Serial.println("Init Touch Pad...");
   TP_Init( Lcd_ScanDir );
   TP_GetAdFac();
   TP_Dialog();
 
-  Serial.println("Drawing...");
+  // Serial.println("Drawing...");
 }
 
 void Demo3_Loop()
