@@ -8,15 +8,15 @@ void Demo1_Setup()
 {
   System_Init();
 
-  Serial.println("3.5inch TFT Touch Shield ShowBMP Demo");
-  Serial.println("SD_Init ");
+  // Serial.println("3.5inch TFT Touch Shield ShowBMP Demo");
+  // Serial.println("SD_Init ");
   SD_Init();
 
-  Serial.println("LCD Init ");
+  // Serial.println("LCD Init ");
   LCD_SCAN_DIR Lcd_ScanDir = SCAN_DIR_DFT;
   LCD_Init(Lcd_ScanDir, 200);
 
-  Serial.println("LCD_Clear ");
+  // Serial.println("LCD_Clear ");
   LCD_Clear(LCD_BACKGROUND);
 
   LCD_ShowBMP();
@@ -31,15 +31,15 @@ void Demo2_Setup()
 {
   System_Init();
 
-  Serial.println("3.5inch　TFT　Touch Shiled LCD Show...");  
-  Serial.println("LCD Init...");
+  // Serial.println("3.5inch　TFT　Touch Shiled LCD Show...");  
+  // Serial.println("LCD Init...");
   LCD_SCAN_DIR Lcd_ScanDir = SCAN_DIR_DFT;  
   LCD_Init( Lcd_ScanDir, 200);
 
-  Serial.println("LCD_Clear...");
+  // Serial.println("LCD_Clear...");
   LCD_Clear(LCD_BACKGROUND);
 
-  Serial.println("LCD_Show...");
+  // Serial.println("LCD_Show...");
   GUI_Show();
 
   // Show the time
@@ -48,7 +48,7 @@ void Demo2_Setup()
   sDev_time.Min = 38;
   sDev_time.Sec = 56;
 
-  Serial.print("Show time\r\n");
+  // Serial.print("Show time\r\n");
   for (int i = 0; i < 10; i++) {
     sDev_time.Sec++;
     GUI_Showtime(200, 150, 327, 197, &sDev_time, RED);
