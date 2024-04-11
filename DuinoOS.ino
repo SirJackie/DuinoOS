@@ -4,6 +4,8 @@
 //#include "GraphicsDriver/LCD_Bmp.h"
 #include "GraphicsDriver/LCD_Touch.h"
 
+//
+
 //void Demo1_Setup()
 //{
 //  System_Init();
