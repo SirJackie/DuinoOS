@@ -10,7 +10,7 @@
 #include "GraphicsDriver/LCD_Bmp.cpp"
 #include "GraphicsDriver/LCD_Driver.cpp"
 #include "GraphicsDriver/LCD_GUI.cpp"
-#include "GraphicsDriver/LCD_Touch.cpp"
+// #include "GraphicsDriver/LCD_Touch.cpp"
 
 //#include "GraphicsDriver/font8.c"
 //#include "GraphicsDriver/font12.c"
