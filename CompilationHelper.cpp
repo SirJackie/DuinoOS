@@ -7,7 +7,7 @@
 // Whatever .cpp included here will have a slight folder confusion that is needed to fixed manually.
 
 #include "GraphicsDriver/DEV_Config.cpp"
-#include "GraphicsDriver/LCD_Bmp.cpp"
+//#include "GraphicsDriver/LCD_Bmp.cpp"
 #include "GraphicsDriver/LCD_Driver.cpp"
 #include "GraphicsDriver/LCD_GUI.cpp"
 #include "GraphicsDriver/LCD_Touch.cpp"

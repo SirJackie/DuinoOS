@@ -1,31 +1,31 @@
 #include "GraphicsDriver/DEV_Config.h"
 #include "GraphicsDriver/LCD_Driver.h"
 #include "GraphicsDriver/LCD_GUI.h"
-#include "GraphicsDriver/LCD_Bmp.h"
+//#include "GraphicsDriver/LCD_Bmp.h"
 #include "GraphicsDriver/LCD_Touch.h"
 
-void Demo1_Setup()
-{
-  System_Init();
-
-  Serial.println("3.5inch TFT Touch Shield ShowBMP Demo");
-  Serial.println("SD_Init ");
-  SD_Init();
-
-  Serial.println("LCD Init ");
-  LCD_SCAN_DIR Lcd_ScanDir = SCAN_DIR_DFT;
-  LCD_Init(Lcd_ScanDir, 200);
-
-  Serial.println("LCD_Clear ");
-  LCD_Clear(LCD_BACKGROUND);
-
-  LCD_ShowBMP();
-}
-
-void Demo1_Loop()
-{
-  ; // Nothing.
-}
+//void Demo1_Setup()
+//{
+//  System_Init();
+//
+//  Serial.println("3.5inch TFT Touch Shield ShowBMP Demo");
+//  Serial.println("SD_Init ");
+//  SD_Init();
+//
+//  Serial.println("LCD Init ");
+//  LCD_SCAN_DIR Lcd_ScanDir = SCAN_DIR_DFT;
+//  LCD_Init(Lcd_ScanDir, 200);
+//
+//  Serial.println("LCD_Clear ");
+//  LCD_Clear(LCD_BACKGROUND);
+//
+//  LCD_ShowBMP();
+//}
+//
+//void Demo1_Loop()
+//{
+//  ; // Nothing.
+//}
 
 void Demo2_Setup()
 {
@@ -86,13 +86,13 @@ void Demo3_Loop()
 }
 
 void setup(){
-  Demo1_Setup();
+//  Demo1_Setup();
   Demo2_Setup();
-//  Demo3_Setup();
+  Demo3_Setup();
 }
 
 void loop(){
 //  Demo1_Loop();
-//  Demo2_Loop();
-//  Demo3_Loop();
+  Demo2_Loop();
+  Demo3_Loop();
 }
