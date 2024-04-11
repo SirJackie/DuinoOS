@@ -12,7 +12,6 @@
 
 ******************************************************************************/
 #include "LCD_Touch.h"
-#include "Debug.h"
 #include <stdlib.h>
 #include <math.h>
 

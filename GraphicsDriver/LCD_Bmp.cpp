@@ -15,7 +15,6 @@
 #include <SPI.h>
 
 #include "LCD_Bmp.h"
-#include "Debug.h"
 
 BMP_DIS BMP_Dis;
 extern LCD_DIS sLCD_DIS;
@@ -81,7 +80,7 @@ static boolean ReadBmpHeader(File f)
   BMP_Dis.BMP_Height = Read32(f);//16-19:Image high
 
   if (BMP_Dis.BMP_Width != sLCD_DIS.LCD_Dis_Column || BMP_Dis.BMP_Height != sLCD_DIS.LCD_Dis_Page)  {   // if image is not 480*320, return false
-    DEBUG("BMP is not 480*320");
+    // DEBUG("BMP is not 480*320");
     return false;
   }
 
@@ -131,9 +130,9 @@ static void LCD_DrawBmp( int x, int y)
       LCD_CS_1;
     }
   }
-  Serial.print("show Bmp use ");
-  Serial.print(millis() - time, DEC);
-  Serial.println(" ms");
+  // Serial.print("show Bmp use ");
+  // Serial.print(millis() - time, DEC);
+  // Serial.println(" ms");
 }
 /**************************************************************************
     This procedure reads a bitmap and draws it to the screen
@@ -151,10 +150,10 @@ void SD_Init(void)
   Sd2Card card;
   card.init(SPI_FULL_SPEED, SD_CS);
   if (!SD.begin( SD_CS ))  {
-    DEBUG("SD init failed!");
+    // DEBUG("SD init failed!");
     while (1);                              // init fail, die here
   }
-  DEBUG("SD init OK!");
+  // DEBUG("SD init OK!");
 }
 
 void LCD_ShowBMP(void) 
@@ -163,16 +162,16 @@ void LCD_ShowBMP(void)
   for (i = 0; i < BMP_NUM; i++) {
     bmpFile = SD.open(BMP_File[i]);
     if (! bmpFile) {
-      DEBUG(BMP_File[i]);
-      DEBUG(" image not found");
+      // DEBUG(BMP_File[i]);
+      // DEBUG(" image not found");
       continue ;
     } else {
-      DEBUG(BMP_File[i]);
-      DEBUG(" image open");
+      // DEBUG(BMP_File[i]);
+      // DEBUG(" image open");
     }
 
     if (! ReadBmpHeader(bmpFile)) {
-      DEBUG("find next image");
+      // DEBUG("find next image");
       continue;
     }
 

@@ -14,7 +14,6 @@
 
 ******************************************************************************/
 #include "LCD_GUI.h"
-#include "Debug.h"
 
 extern LCD_DIS sLCD_DIS;
 /******************************************************************************
@@ -48,7 +47,7 @@ void GUI_DrawPoint(POINT Xpoint, POINT Ypoint, COLOR Color,
                    DOT_PIXEL Dot_Pixel, DOT_STYLE DOT_STYLE)
 {
   if (Xpoint > sLCD_DIS.LCD_Dis_Column || Ypoint > sLCD_DIS.LCD_Dis_Page) {
-    DEBUG("GUI_DrawPoint Input exceeds the normal display range\r\n");
+    // DEBUG("GUI_DrawPoint Input exceeds the normal display range\r\n");
     return;
   }
 
@@ -82,7 +81,7 @@ void GUI_DrawLine(POINT Xstart, POINT Ystart, POINT Xend, POINT Yend,
 {
   if (Xstart > sLCD_DIS.LCD_Dis_Column || Ystart > sLCD_DIS.LCD_Dis_Page ||
       Xend > sLCD_DIS.LCD_Dis_Column || Yend > sLCD_DIS.LCD_Dis_Page) {
-    DEBUG("GUI_DrawLine Input exceeds the normal display range\r\n");
+    // DEBUG("GUI_DrawLine Input exceeds the normal display range\r\n");
     return;
   }
 
@@ -142,7 +141,7 @@ void GUI_DrawRectangle(POINT Xstart, POINT Ystart, POINT Xend, POINT Yend,
 {
   if (Xstart > sLCD_DIS.LCD_Dis_Column || Ystart > sLCD_DIS.LCD_Dis_Page ||
       Xend > sLCD_DIS.LCD_Dis_Column || Yend > sLCD_DIS.LCD_Dis_Page) {
-    DEBUG("Input exceeds the normal display range\r\n");
+    // DEBUG("Input exceeds the normal display range\r\n");
     return;
   }
 
@@ -182,7 +181,7 @@ void GUI_DrawCircle(POINT X_Center, POINT Y_Center, LENGTH Radius,
                     COLOR Color, DRAW_FILL  Draw_Fill , DOT_PIXEL Dot_Pixel)
 {
   if (X_Center > sLCD_DIS.LCD_Dis_Column || Y_Center >= sLCD_DIS.LCD_Dis_Page) {
-    DEBUG("GUI_DrawCircle Input exceeds the normal display range\r\n");
+    // DEBUG("GUI_DrawCircle Input exceeds the normal display range\r\n");
     return;
   }
 
@@ -253,7 +252,7 @@ void GUI_DisChar(POINT Xpoint, POINT Ypoint, const char Acsii_Char,
   POINT Page, Column;
 
   if (Xpoint > sLCD_DIS.LCD_Dis_Column || Ypoint > sLCD_DIS.LCD_Dis_Page) {
-    DEBUG("GUI_DisChar Input exceeds the normal display range\r\n");
+    // DEBUG("GUI_DisChar Input exceeds the normal display range\r\n");
     return;
   }
 
@@ -300,7 +299,7 @@ void GUI_DisString_EN(POINT Xstart, POINT Ystart, const char * pString,
   POINT Ypoint = Ystart;
 
   if (Xstart > sLCD_DIS.LCD_Dis_Column || Ystart > sLCD_DIS.LCD_Dis_Page) {
-    DEBUG("GUI_DisString_EN Input exceeds the normal display range\r\n");
+    // DEBUG("GUI_DisString_EN Input exceeds the normal display range\r\n");
     return;
   }
 
@@ -346,7 +345,7 @@ void GUI_DisNum(POINT Xpoint, POINT Ypoint, int32_t Nummber,
   uint8_t *pStr = Str_Array;
 
   if (Xpoint > sLCD_DIS.LCD_Dis_Column || Ypoint > sLCD_DIS.LCD_Dis_Page) {
-    DEBUG("GUI_DisNum Input exceeds the normal display range\r\n");
+    // DEBUG("GUI_DisNum Input exceeds the normal display range\r\n");
     return;
   }
 
@@ -425,7 +424,7 @@ void GUI_DisGrayMap(POINT Xpoint, POINT Ypoint, const unsigned char *pBmp)
         pBmp++;
       }
   } else {
-    DEBUG("Does not support type\r\n");
+    // DEBUG("Does not support type\r\n");
     return;
   }
 }
@@ -534,17 +533,17 @@ void GUI_Show(void)
   GUI_Clear(WHITE);
   if (sLCD_DIS.LCD_Dis_Column > sLCD_DIS.LCD_Dis_Page) { //Horizontal screen display
 
-    DEBUG("Draw Line\r\n");
+    // DEBUG("Draw Line\r\n");
     GUI_DrawLine(0, 10, LCD_WIDTH, 10, RED, LINE_SOLID, DOT_PIXEL_2X2);
     GUI_DrawLine(0, 20, LCD_WIDTH, 20, RED, LINE_DOTTED, DOT_PIXEL_DFT);
     GUI_DrawLine(0, 300, LCD_WIDTH, 300, RED, LINE_DOTTED, DOT_PIXEL_DFT);
     GUI_DrawLine(0, 310, LCD_WIDTH, 310, RED, LINE_SOLID, DOT_PIXEL_2X2);
 
-    DEBUG("Draw Rectangle\r\n");
+    // DEBUG("Draw Rectangle\r\n");
     GUI_DrawRectangle(10, 30, sLCD_DIS.LCD_Dis_Column - 10, sLCD_DIS.LCD_Dis_Page - 30, BLUE, DRAW_EMPTY, DOT_PIXEL_DFT);
     GUI_DrawRectangle(20, 40, sLCD_DIS.LCD_Dis_Column - 20, 60, BLUE, DRAW_FULL, DOT_PIXEL_DFT);
 
-    DEBUG("Draw Olympic Rings\r\n");
+    // DEBUG("Draw Olympic Rings\r\n");
     uint16_t Cx1 = 190, Cy1 = 240, Cr = 20;
     uint16_t Cx2 = Cx1 + (2.5 * Cr), Cy2 = Cy1;
     uint16_t Cx3 = Cx1 + (5 * Cr), Cy3 = Cy1;
@@ -557,30 +556,30 @@ void GUI_Show(void)
     GUI_DrawCircle( Cx4, Cy4, Cr, YELLOW, DRAW_EMPTY, DOT_PIXEL_2X2);
     GUI_DrawCircle( Cx5, Cy5, Cr, GREEN, DRAW_EMPTY, DOT_PIXEL_2X2);
 
-    DEBUG("Draw Realistic circles\r\n");
+    // DEBUG("Draw Realistic circles\r\n");
     GUI_DrawCircle(50, 250, 30, CYAN, DRAW_FULL, DOT_PIXEL_DFT);
     GUI_DrawCircle(sLCD_DIS.LCD_Dis_Column - 50, 250, 30, CYAN, DRAW_FULL, DOT_PIXEL_DFT);
 
-    DEBUG("Display String\r\n");
+    // DEBUG("Display String\r\n");
     GUI_DisString_EN(80, 80, "WaveShare Electronic", &Font16, LCD_BACKGROUND, BLUE);
     GUI_DisString_EN(80, 120, "3.5inch TFTLCD", &Font16, RED, BLUE);
 
-    DEBUG("Display Nummber\r\n");
+    // DEBUG("Display Nummber\r\n");
     GUI_DisNum(80, 150, 1234567890, &Font16, LCD_BACKGROUND, BLUE);
 
   } else { //Vertical screen display
 
-    DEBUG("Draw Line\r\n");
+    // DEBUG("Draw Line\r\n");
     GUI_DrawLine(0, 10, sLCD_DIS.LCD_Dis_Column , 10, RED, LINE_SOLID, DOT_PIXEL_2X2);
     GUI_DrawLine(0, 20, sLCD_DIS.LCD_Dis_Column , 20, RED, LINE_DOTTED, DOT_PIXEL_DFT);
     GUI_DrawLine(0, sLCD_DIS.LCD_Dis_Page - 20, sLCD_DIS.LCD_Dis_Column , sLCD_DIS.LCD_Dis_Page - 20, RED, LINE_DOTTED, DOT_PIXEL_DFT);
     GUI_DrawLine(0, sLCD_DIS.LCD_Dis_Page - 10, sLCD_DIS.LCD_Dis_Column , sLCD_DIS.LCD_Dis_Page - 10, RED, LINE_SOLID, DOT_PIXEL_2X2);
 
-    DEBUG("Draw Rectangle\r\n");
+    // DEBUG("Draw Rectangle\r\n");
     GUI_DrawRectangle(10, 30, sLCD_DIS.LCD_Dis_Column - 10, sLCD_DIS.LCD_Dis_Page - 30, BLUE, DRAW_EMPTY, DOT_PIXEL_DFT);
     GUI_DrawRectangle(20, 40, sLCD_DIS.LCD_Dis_Column - 20, 60, BLUE, DRAW_FULL, DOT_PIXEL_DFT);
 
-    DEBUG("Draw Olympic Rings\r\n");
+    // DEBUG("Draw Olympic Rings\r\n");
     uint16_t Cx1 = 120, Cy1 = 300, Cr = 20;
     uint16_t Cx2 = Cx1 + (2.5 * Cr), Cy2 = Cy1;
     uint16_t Cx3 = Cx1 + (5 * Cr), Cy3 = Cy1;
@@ -593,15 +592,15 @@ void GUI_Show(void)
     GUI_DrawCircle( Cx4, Cy4, Cr, YELLOW, DRAW_EMPTY, DOT_PIXEL_2X2);
     GUI_DrawCircle( Cx5, Cy5, Cr, GREEN, DRAW_EMPTY, DOT_PIXEL_2X2);
 
-    DEBUG("Draw Realistic circles\r\n");
+    // DEBUG("Draw Realistic circles\r\n");
     GUI_DrawCircle(50, 400, 30, CYAN, DRAW_FULL, DOT_PIXEL_DFT);
     GUI_DrawCircle(sLCD_DIS.LCD_Dis_Column - 50, 400, 30, CYAN, DRAW_FULL, DOT_PIXEL_DFT);
 
-    DEBUG("Display String\r\n");
+    // DEBUG("Display String\r\n");
     GUI_DisString_EN(40, 120, "WaveShare Electronic", &Font16, LCD_BACKGROUND, BLUE);
     GUI_DisString_EN(40, 180, "3.5inch TFTLCD", &Font16, RED, BLUE);
 
-    DEBUG("Display Nummber\r\n");
+    // DEBUG("Display Nummber\r\n");
     GUI_DisNum(40, 210, 1234567890, &Font16, LCD_BACKGROUND, BLUE);
 
   }
