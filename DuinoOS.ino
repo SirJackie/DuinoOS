@@ -87,12 +87,12 @@ void Demo3_Loop()
 
 void setup(){
 //  Demo1_Setup();
-  Demo2_Setup();
+//  Demo2_Setup();
   Demo3_Setup();
 }
 
 void loop(){
 //  Demo1_Loop();
-  Demo2_Loop();
+//  Demo2_Loop();
   Demo3_Loop();
 }
