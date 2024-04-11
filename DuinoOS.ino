@@ -165,42 +165,27 @@ static void TP_Scan()
     isPressed = true;
 
     TP_Read_TwiceADC(&Xpoint, &Ypoint);
-    Serial.print(Xpoint);
-    Serial.print(" ");
-    Serial.print(Ypoint);
-    Serial.print(" ");
+    // Serial.print(Xpoint);
+    // Serial.print(" ");
+    // Serial.print(Ypoint);
+    // Serial.print(" ");
 
-    if (Lcd_ScanDir == R2L_D2U) {
-      Xpoint = fXfac * Xpoint +
-                        iXoff;
-      Ypoint = fYfac * Ypoint +
-                        iYoff;
-    } else if (Lcd_ScanDir == L2R_U2D) {
-      Xpoint = LCD_Dis_Column -
-                        fXfac * Xpoint -
-                        iXoff;
-      Ypoint = LCD_Dis_Page -
-                        fYfac * Ypoint -
-                        iYoff;
-    } else if (Lcd_ScanDir == U2D_R2L) {
-      Xpoint = fXfac * Ypoint +
-                        iXoff;
-      Ypoint = fYfac * Xpoint +
-                        iYoff;
-    } else {
-      Xpoint = LCD_Dis_Column -
-                        fXfac * Ypoint -
-                        iXoff;
-      Ypoint = LCD_Dis_Page -
-                        fYfac * Xpoint -
-                        iYoff;
-    }
+    // X: 3880 -> 320 (originalY)  3560 maps to 480;; 0.135x
+    // Y: 280 -> 3780 (originalX)  3500 maps to 320;; 0.091x
 
-    Serial.print(Xpoint);
-    Serial.print(" ");
-    Serial.print(Ypoint);
-    Serial.print(" ");
-    Serial.print("\n");
+    // So: newX = (originalY * -0.135f) + 523.8f
+    // So: newY = (originalX * 0.091f) - 25.48f
+
+    float XpointFloat = ((float)Ypoint * -0.135f) + 523.8f;
+    float YpointFloat = ((float)Xpoint * 0.091f) - 25.48f;
+    Xpoint = (int16_t)XpointFloat;
+    Ypoint = (int16_t)YpointFloat;
+
+    // Serial.print(Xpoint);
+    // Serial.print(" ");
+    // Serial.print(Ypoint);
+    // Serial.print(" ");
+    // Serial.print("\n");
 
   } else {  // NOT PRESSED
     isPressed = false;
@@ -286,7 +271,7 @@ void Demo2_Loop()
 
 void Demo3_Setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   Serial.println("Init...");
   
