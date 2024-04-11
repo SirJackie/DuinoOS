@@ -165,6 +165,11 @@ static void TP_Scan()
     isPressed = true;
 
     TP_Read_TwiceADC(&Xpoint, &Ypoint);
+    Serial.print(Xpoint);
+    Serial.print(" ");
+    Serial.print(Ypoint);
+    Serial.print(" ");
+
     if (Lcd_ScanDir == R2L_D2U) {
       Xpoint = fXfac * Xpoint +
                         iXoff;
@@ -190,6 +195,13 @@ static void TP_Scan()
                         fYfac * Xpoint -
                         iYoff;
     }
+
+    Serial.print(Xpoint);
+    Serial.print(" ");
+    Serial.print(Ypoint);
+    Serial.print(" ");
+    Serial.print("\n");
+
   } else {  // NOT PRESSED
     isPressed = false;
   }
@@ -338,5 +350,5 @@ void setup(){
 void loop(){
 //  Demo1_Loop();
 //  Demo2_Loop();
-//  Demo3_Loop();
+  Demo3_Loop();
 }
