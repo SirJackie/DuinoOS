@@ -216,24 +216,8 @@ void Demo3_Loop()
 
   Serial.println("Milestone 2");
 
-  // GUI_DrawPoint(Xpoint, Ypoint,
-  //               BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
-  // GUI_DrawPoint(Xpoint + 1, Ypoint,
-  //               BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
-  // GUI_DrawPoint(Xpoint, Ypoint + 1,
-  //               BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
-  // GUI_DrawPoint(Xpoint + 1, Ypoint + 1,
-  //               BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
-  // GUI_DrawPoint(Xpoint, Ypoint,
-  //               BLACK , DOT_PIXEL_2X2, DOT_FILL_RIGHTUP);
-
-  LCD_SetPointlColor(Xpoint, Ypoint, BLACK);
-    LCD_SetPointlColor(Xpoint, Ypoint, BLACK);
-      LCD_SetPointlColor(Xpoint, Ypoint, BLACK);
-        LCD_SetPointlColor(Xpoint, Ypoint, BLACK);
-          LCD_SetPointlColor(Xpoint, Ypoint, BLACK);
-
-  Driver_Delay_us(500);
+  LCD_SetCursor(Xpoint, Ypoint);
+  LCD_SetColor(BLACK, 1, 1);
 
   Serial.println("Milestone 3");
 }
