@@ -8,6 +8,10 @@
 #define BUFFPIXEL_X3(__val)    ( (__val) * 3)                 // BUFFPIXELx3
 #define RGB24TORGB16(R,G,B) (( (R) >> 3 ) << 11 ) | (( (G) >> 2 ) << 5) | ( (B) >> 3)
 
+#define clamp0(x) (x > 0 ? x : 0)
+#define clamp255(x) (x < 255 ? x : 255)
+#define clampChannel(x) (clamp255(clamp0(x)))
+
 typedef struct {
   uint32_t Size;
   uint32_t Index ;
@@ -162,7 +166,7 @@ void Demo1_Setup()
 
 
 
-  LCD_SetWindow(0, 0, 479, 319);
+  LCD_SetWindow(0, 0, 480, 320);
 
   LCD_DC_1;
   LCD_CS_0;
@@ -180,8 +184,21 @@ void Demo1_Setup()
       //   RGB24TORGB16( ReadBuff[2], ReadBuff[1], ReadBuff[0])
       // );
 
-      char r = (255 - x) > 0 ? (255 - x) : 0;
-      char g = y < 255 ? 255 : y;
+      int x2 = x % 128;
+      int y2 = y % 128;
+
+      unsigned char r = clampChannel(255 - 2*x2);
+      unsigned char g = clampChannel(2*y2);
+
+      // Serial.print("X: ");
+      // Serial.print(x);
+      // Serial.print("; Y: ");
+      // Serial.print(y);
+      // Serial.print("; R: ");
+      // Serial.print((unsigned int)r);
+      // Serial.print("; G: ");
+      // Serial.print((unsigned int)g);
+      // Serial.print("\n");
 
       COLOR color = RGB24TORGB16(r, g, 0);
 

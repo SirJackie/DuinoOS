@@ -245,7 +245,7 @@ static void LCD_Write_AllData(uint16_t Data, uint32_t DataLen)
 }
 
 void LCD_Clear(COLOR color){
-  LCD_SetWindow(0, 0, LCD_WIDTH - 1, LCD_HEIGHT - 1);
+  LCD_SetWindow(0, 0, LCD_WIDTH, LCD_HEIGHT);
   LCD_Write_AllData(color, LCD_LENGTH);
 }
 
