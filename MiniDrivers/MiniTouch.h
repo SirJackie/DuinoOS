@@ -5,6 +5,6 @@
 extern bool isPressed;
 extern int16_t Xpoint, Ypoint;
 void Touch();
-void TouchInitialize();
+void Touch_Init();
 
 #endif

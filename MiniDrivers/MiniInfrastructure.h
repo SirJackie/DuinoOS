@@ -38,6 +38,10 @@
 #define TP_BUSY 6
 #define GET_TP_BUSY    digitalRead(TP_BUSY)
 
+// Other Definitions
+#define USE_SPI_4W 1
+#define USE_IIC    0
+
 /*
 ** Utilities
 */ 

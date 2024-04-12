@@ -2,7 +2,7 @@
 #define __MINI_GRAPHICS_H_
 
 #include "MiniInfrastructure.h"
-#include "../GraphicsDriver/fonts.h"
+#include "../Fonts/fonts.h"
 
 #define	COLOR		   uint16_t		//The variable type of the color (unsigned short)
 #define	POINT		   uint16_t		//The type of coordinate (unsigned short)

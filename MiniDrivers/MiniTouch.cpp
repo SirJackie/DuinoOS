@@ -144,7 +144,7 @@ static void Touch()
   // since the touch screen is already unattached (disabled) earlier in the TP_CS_1; (digitalWrite(TP_CS, HIGH))
 }
 
-static void TouchInitialize() {
+static void Touch_Init() {
   pinMode(TP_CS, OUTPUT);
   pinMode(TP_IRQ, INPUT);
   digitalWrite(TP_IRQ, HIGH);
