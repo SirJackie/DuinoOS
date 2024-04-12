@@ -1,5 +1,25 @@
 #include "MiniGraphics.h"
-#include "../GraphicsDriver/LCD_GUI.h"
+
+/*******************************************************************************
+function:
+		Write register address and data
+*******************************************************************************/
+void LCD_WriteReg(uint8_t Reg)
+{
+    LCD_DC_0;
+    LCD_CS_0;
+    SPI4W_Write_Byte(Reg);
+    LCD_CS_1;
+}
+
+void LCD_WriteData(uint8_t Data)
+{
+    LCD_DC_1;
+    LCD_CS_0;
+    SPI4W_Write_Byte(Data >> 8);
+    SPI4W_Write_Byte(Data & 0XFF);
+    LCD_CS_1;
+}
 
 /********************************************************************************
 function:	Sets the start position and size of the display area
@@ -9,7 +29,7 @@ parameter:
 	Xend    :   X direction end coordinates
 	Yend    :   Y direction end coordinates
 ********************************************************************************/
-static void LCD_SetWindow(POINT Xstart, POINT Ystart,	POINT Xend, POINT Yend)
+static void LCD_SetWindow(uint16_t Xstart, uint16_t Ystart,	uint16_t Xend, uint16_t Yend)
 {
     //set the X coordinates
     LCD_WriteReg(0x2A);

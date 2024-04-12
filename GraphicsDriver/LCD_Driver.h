@@ -19,9 +19,7 @@
 
 #include "DEV_Config.h"
 
-#define	COLOR				uint16_t		//The variable type of the color (unsigned short) 
-#define	POINT				uint16_t		//The type of coordinate (unsigned short) 
-#define	LENGTH				uint16_t		//The type of coordinate (unsigned short) 
+
 
 /********************************************************************************
 function:

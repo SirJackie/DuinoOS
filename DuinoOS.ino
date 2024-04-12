@@ -1,9 +1,10 @@
+#include "MiniDrivers/MiniInfrastructure.h"
 #include "MiniDrivers/MiniTouch.h"
 #include "MiniDrivers/MiniGraphics.h"
 
-#include "GraphicsDriver/DEV_Config.h"
-#include "GraphicsDriver/LCD_Driver.h"
-#include "GraphicsDriver/LCD_GUI.h"
+// #include "GraphicsDriver/DEV_Config.h"
+// #include "GraphicsDriver/LCD_Driver.h"
+// #include "GraphicsDriver/LCD_GUI.h"
 // #include "GraphicsDriver/LCD_Bmp.h"
 
 
@@ -11,61 +12,7 @@
 
 
 
-/********************************************************************************
-function:	Set the display scan and color transfer modes
-parameter:
-		Scan_dir   :   Scan direction
-		Colorchose :   RGB or GBR color format
-********************************************************************************/
-void LCD_SetGramScanWay(LCD_SCAN_DIR Scan_dir)
-{
-    uint16_t MemoryAccessReg_Data = 0; //addr:0x36
-    uint16_t DisFunReg_Data = 0; //addr:0xB6
 
-    // Gets the scan direction of GRAM
-    switch (Scan_dir) {
-    case L2R_U2D:
-        MemoryAccessReg_Data = 0x08;//0x08 | 0X8
-        DisFunReg_Data = 0x22;
-        break;
-    case L2R_D2U:
-        MemoryAccessReg_Data = 0x08;
-        DisFunReg_Data = 0x62;
-        break;
-    case R2L_U2D: //0X4
-        MemoryAccessReg_Data = 0x08;
-        DisFunReg_Data = 0x02;
-        break;
-    case R2L_D2U: //0XC
-        MemoryAccessReg_Data = 0x08;
-        DisFunReg_Data = 0x42;
-        break;
-    case U2D_L2R: //0X2
-        MemoryAccessReg_Data = 0x28;
-        DisFunReg_Data = 0x22;
-        break;
-    case U2D_R2L: //0X6
-        MemoryAccessReg_Data = 0x28;
-        DisFunReg_Data = 0x02;
-        break;
-    case D2U_L2R: //0XA
-        MemoryAccessReg_Data = 0x28;
-        DisFunReg_Data = 0x62;
-        break;
-    case D2U_R2L: //0XE
-        MemoryAccessReg_Data = 0x28;
-        DisFunReg_Data = 0x42;
-        break;
-    }
-
-    // Set the read / write scan direction of the frame memory
-    LCD_WriteReg(0xB6);
-    LCD_WriteData(0X00);
-    LCD_WriteData(DisFunReg_Data);
-
-    LCD_WriteReg(0x36);
-    LCD_WriteData(MemoryAccessReg_Data);
-}
 
 
 
@@ -94,7 +41,17 @@ void LCD_SetGramScanWay(LCD_SCAN_DIR Scan_dir)
 
 void Demo2_Setup()
 {
-  System_Init();
+  // System_Init();
+  //set pin
+  pinMode(LCD_CS, OUTPUT);
+  pinMode(LCD_RST, OUTPUT);
+  pinMode(LCD_DC, OUTPUT);
+  pinMode(LCD_BL,OUTPUT);
+  
+  SPI.setDataMode(SPI_MODE0);
+  SPI.setBitOrder(MSBFIRST);
+  SPI.setClockDivider(SPI_CLOCK_DIV2);
+  SPI.begin();
 
   //Hardware reset
   // LCD_Reset();
@@ -218,7 +175,82 @@ void Demo2_Setup()
     LCD_WriteData(0x55);
 
   //Set the display scan and color transfer modes
-  LCD_SetGramScanWay( U2D_R2L);
+  // LCD_SetGramScanWay( U2D_R2L);
+
+
+
+
+
+
+/********************************************************************************
+function:	Set the display scan and color transfer modes
+parameter:
+		Scan_dir   :   Scan direction
+		Colorchose :   RGB or GBR color format
+********************************************************************************/
+
+
+    uint16_t MemoryAccessReg_Data = 0; //addr:0x36
+    uint16_t DisFunReg_Data = 0; //addr:0xB6
+
+    // Gets the scan direction of GRAM
+    // switch (Scan_dir) {
+    // case L2R_U2D:
+    //     MemoryAccessReg_Data = 0x08;//0x08 | 0X8
+    //     DisFunReg_Data = 0x22;
+    //     break;
+    // case L2R_D2U:
+    //     MemoryAccessReg_Data = 0x08;
+    //     DisFunReg_Data = 0x62;
+    //     break;
+    // case R2L_U2D: //0X4
+    //     MemoryAccessReg_Data = 0x08;
+    //     DisFunReg_Data = 0x02;
+    //     break;
+    // case R2L_D2U: //0XC
+    //     MemoryAccessReg_Data = 0x08;
+    //     DisFunReg_Data = 0x42;
+    //     break;
+    // case U2D_L2R: //0X2
+    //     MemoryAccessReg_Data = 0x28;
+    //     DisFunReg_Data = 0x22;
+    //     break;
+    // case U2D_R2L: //0X6
+        MemoryAccessReg_Data = 0x28;
+        DisFunReg_Data = 0x02;
+        // break;
+    // case D2U_L2R: //0XA
+    //     MemoryAccessReg_Data = 0x28;
+    //     DisFunReg_Data = 0x62;
+    //     break;
+    // case D2U_R2L: //0XE
+    //     MemoryAccessReg_Data = 0x28;
+    //     DisFunReg_Data = 0x42;
+    //     break;
+    // }
+
+    // Set the read / write scan direction of the frame memory
+    LCD_WriteReg(0xB6);
+    LCD_WriteData(0X00);
+    LCD_WriteData(DisFunReg_Data);
+
+    LCD_WriteReg(0x36);
+    LCD_WriteData(MemoryAccessReg_Data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   Driver_Delay_ms(200);
 
   //sleep out

@@ -6,14 +6,14 @@
 // Side Effect:
 // Whatever .cpp included here will have a slight folder confusion that is needed to fixed manually.
 
-// #include "MiniDrivers/MiniInfrastructure.h"
+#include "MiniDrivers/MiniInfrastructure.cpp"
 #include "MiniDrivers/MiniTouch.cpp"
 #include "MiniDrivers/MiniGraphics.cpp"
 
-#include "GraphicsDriver/DEV_Config.cpp"
+// #include "GraphicsDriver/DEV_Config.cpp"
 // #include "GraphicsDriver/LCD_Bmp.cpp"
-#include "GraphicsDriver/LCD_Driver.cpp"
-#include "GraphicsDriver/LCD_GUI.cpp"
+// #include "GraphicsDriver/LCD_Driver.cpp"
+// #include "GraphicsDriver/LCD_GUI.cpp"
 
 //#include "GraphicsDriver/font8.c"
 //#include "GraphicsDriver/font12.c"

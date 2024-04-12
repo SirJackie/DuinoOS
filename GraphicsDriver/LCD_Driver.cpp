@@ -36,26 +36,7 @@ static void LCD_SetBackLight(uint16_t value)
     PWM_SetValue(value);
 }
 
-/*******************************************************************************
-function:
-		Write register address and data
-*******************************************************************************/
-void LCD_WriteReg(uint8_t Reg)
-{
-    LCD_DC_0;
-    LCD_CS_0;
-    SPI4W_Write_Byte(Reg);
-    LCD_CS_1;
-}
 
-void LCD_WriteData(uint8_t Data)
-{
-    LCD_DC_1;
-    LCD_CS_0;
-    SPI4W_Write_Byte(Data >> 8);
-    SPI4W_Write_Byte(Data & 0XFF);
-    LCD_CS_1;
-}
 
 
 

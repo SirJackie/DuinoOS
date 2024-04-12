@@ -9,33 +9,6 @@
 #include "DEV_Config.h"
 #include <SPI.h>
 
-/********************************************************************************
-  function:    System Init and exit
-  note:
-    Initialize the communication method
-********************************************************************************/
-uint8_t System_Init(void)
-{
-  //set pin
-  pinMode(LCD_CS, OUTPUT);
-  pinMode(LCD_RST, OUTPUT);
-  pinMode(LCD_DC, OUTPUT);
-  pinMode(LCD_BL,OUTPUT);
-  pinMode(TP_CS, OUTPUT);
-  pinMode(TP_IRQ, INPUT);
-  digitalWrite(TP_IRQ, HIGH);
-
-  //set Serial
-  // Serial.begin(115200);
-  
-  SPI.setDataMode(SPI_MODE0);
-  SPI.setBitOrder(MSBFIRST);
-  SPI.setClockDivider(SPI_CLOCK_DIV2);
-  SPI.begin();
-
-  return 0;
-}
-
 void PWM_SetValue(uint16_t value)
 {
     pinMode(LCD_BL, OUTPUT);
