@@ -162,22 +162,36 @@ void Demo1_Setup()
 
 
 
-  
+  LCD_SetWindow(0, 0, 479, 319);
+
+  LCD_DC_1;
+  LCD_CS_0;
 
   for(int y = 0; y < 320; y++){
     for(int x = 0; x < 480; x++){
-      myFile.read(ReadBuff, BUFFPIXEL_X3(BuffPixel));
+      // myFile.read(ReadBuff, BUFFPIXEL_X3(BuffPixel));
 
       // Serial.println((int)ReadBuff[0]);
       // Serial.println((int)ReadBuff[1]);
       // Serial.println((int)ReadBuff[2]);
 
-      DrawPixel(
-        x, y,
-        RGB24TORGB16( ReadBuff[2], ReadBuff[1], ReadBuff[0])
-      );
+      // DrawPixel(
+      //   x, y,
+      //   RGB24TORGB16( ReadBuff[2], ReadBuff[1], ReadBuff[0])
+      // );
+
+      char r = (255 - x) > 0 ? (255 - x) : 0;
+      char g = y < 255 ? 255 : y;
+
+      COLOR color = RGB24TORGB16(r, g, 0);
+
+      SPI4W_Write_Byte(color >> 8);
+      SPI4W_Write_Byte(color & 0XFF);
+      
     }
   }
+
+  LCD_CS_1;
 
   // Close the file
   myFile.close();
