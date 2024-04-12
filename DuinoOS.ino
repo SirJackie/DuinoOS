@@ -1,4 +1,6 @@
 #include "MiniDrivers/MiniTouch.h"
+#include "MiniDrivers/MiniGraphics.h"
+
 #include "GraphicsDriver/DEV_Config.h"
 #include "GraphicsDriver/LCD_Driver.h"
 #include "GraphicsDriver/LCD_GUI.h"
@@ -28,7 +30,33 @@ void Demo2_Setup()
   LCD_Clear(LCD_BACKGROUND);
 
   // GUI_DisString_EN(80, 80, "WaveShare Electronic", &Font16, LCD_BACKGROUND, BLUE);
-  GUI_DisChar(80, 80, 'F', &Font16, LCD_BACKGROUND, BLUE);
+  // GUI_DisChar(80, 80, 'F', &Font16, LCD_BACKGROUND, BLUE);
+
+  DrawChar(80, 80, 'F', &Font16, BLACK);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
   LCD_SetPointlColor(0, 0, RED);
 }

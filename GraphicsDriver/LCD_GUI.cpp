@@ -315,7 +315,7 @@ void GUI_DisString_EN(POINT Xstart, POINT Ystart, const char * pString,
       Xpoint = Xstart;
       Ypoint = Ystart;
     }
-    GUI_DisChar(Xpoint, Ypoint, * pString, Font, Color_Background, Color_Foreground);
+    
 
     //The next character of the address
     pString ++;
