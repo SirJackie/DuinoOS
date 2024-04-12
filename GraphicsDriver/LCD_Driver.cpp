@@ -57,21 +57,7 @@ void LCD_WriteData(uint8_t Data)
     LCD_CS_1;
 }
 
-/*******************************************************************************
-function:
-		Write register data
-*******************************************************************************/
-static void LCD_Write_AllData(uint16_t Data, uint32_t DataLen)
-{
-    uint32_t i;
-    LCD_DC_1;
-    LCD_CS_0;
-    for(i = 0; i < DataLen; i++) {
-        SPI4W_Write_Byte(Data >> 8);
-        SPI4W_Write_Byte(Data & 0XFF);
-    }
-    LCD_CS_1;
-}
+
 
 /*******************************************************************************
 function:
@@ -184,73 +170,7 @@ static void LCD_InitReg(void)
 
 }
 
-/********************************************************************************
-function:	Set the display scan and color transfer modes
-parameter:
-		Scan_dir   :   Scan direction
-		Colorchose :   RGB or GBR color format
-********************************************************************************/
-void LCD_SetGramScanWay(LCD_SCAN_DIR Scan_dir)
-{
-    uint16_t MemoryAccessReg_Data = 0; //addr:0x36
-    uint16_t DisFunReg_Data = 0; //addr:0xB6
 
-    // Gets the scan direction of GRAM
-    switch (Scan_dir) {
-    case L2R_U2D:
-        MemoryAccessReg_Data = 0x08;//0x08 | 0X8
-        DisFunReg_Data = 0x22;
-        break;
-    case L2R_D2U:
-        MemoryAccessReg_Data = 0x08;
-        DisFunReg_Data = 0x62;
-        break;
-    case R2L_U2D: //0X4
-        MemoryAccessReg_Data = 0x08;
-        DisFunReg_Data = 0x02;
-        break;
-    case R2L_D2U: //0XC
-        MemoryAccessReg_Data = 0x08;
-        DisFunReg_Data = 0x42;
-        break;
-    case U2D_L2R: //0X2
-        MemoryAccessReg_Data = 0x28;
-        DisFunReg_Data = 0x22;
-        break;
-    case U2D_R2L: //0X6
-        MemoryAccessReg_Data = 0x28;
-        DisFunReg_Data = 0x02;
-        break;
-    case D2U_L2R: //0XA
-        MemoryAccessReg_Data = 0x28;
-        DisFunReg_Data = 0x62;
-        break;
-    case D2U_R2L: //0XE
-        MemoryAccessReg_Data = 0x28;
-        DisFunReg_Data = 0x42;
-        break;
-    }
-
-    //Get the screen scan direction
-    sLCD_DIS.LCD_Scan_Dir = Scan_dir;
-
-    //Get GRAM and LCD width and height
-    if(Scan_dir == L2R_U2D || Scan_dir == L2R_D2U || Scan_dir == R2L_U2D || Scan_dir == R2L_D2U) {
-        sLCD_DIS.LCD_Dis_Column	= LCD_HEIGHT ;
-        sLCD_DIS.LCD_Dis_Page = LCD_WIDTH ;
-    } else {
-        sLCD_DIS.LCD_Dis_Column	= LCD_WIDTH ;
-        sLCD_DIS.LCD_Dis_Page = LCD_HEIGHT ;
-    }
-
-    // Set the read / write scan direction of the frame memory
-    LCD_WriteReg(0xB6);
-    LCD_WriteData(0X00);
-    LCD_WriteData(DisFunReg_Data);
-
-    LCD_WriteReg(0x36);
-    LCD_WriteData(MemoryAccessReg_Data);
-}
 
 /********************************************************************************
 function:
@@ -280,31 +200,7 @@ void LCD_Init(LCD_SCAN_DIR LCD_ScanDir, uint16_t LCD_BLval)
     LCD_WriteReg(0x29);
 }
 
-/********************************************************************************
-function:	Sets the start position and size of the display area
-parameter:
-	Xstart 	:   X direction Start coordinates
-	Ystart  :   Y direction Start coordinates
-	Xend    :   X direction end coordinates
-	Yend    :   Y direction end coordinates
-********************************************************************************/
-void LCD_SetWindow(POINT Xstart, POINT Ystart,	POINT Xend, POINT Yend)
-{
-    //set the X coordinates
-    LCD_WriteReg(0x2A);
-    LCD_WriteData(Xstart >> 8);	 				//Set the horizontal starting point to the high octet
-    LCD_WriteData(Xstart & 0xff);	 				//Set the horizontal starting point to the low octet
-    LCD_WriteData((Xend - 1) >> 8);	//Set the horizontal end to the high octet
-    LCD_WriteData((Xend - 1) & 0xff);	//Set the horizontal end to the low octet
 
-    //set the Y coordinates
-    LCD_WriteReg(0x2B);
-    LCD_WriteData(Ystart >> 8);
-    LCD_WriteData(Ystart & 0xff );
-    LCD_WriteData((Yend - 1) >> 8);
-    LCD_WriteData((Yend - 1) & 0xff);
-    LCD_WriteReg(0x2C);
-}
 
 /********************************************************************************
 function:	Set the display point (Xpoint, Ypoint)
