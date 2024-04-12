@@ -205,6 +205,13 @@ void Demo3_Loop()
 {
   TP_Scan();
 
+  if (isPressed) {
+    Serial.print(Xpoint);
+    Serial.print(" ");
+    Serial.print(Ypoint);
+    Serial.print("\n");
+  }
+
   GUI_DrawPoint(Xpoint, Ypoint,
                 BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
   GUI_DrawPoint(Xpoint + 1, Ypoint,
