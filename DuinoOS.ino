@@ -34,8 +34,8 @@ static unsigned int TP_Read_ADC(unsigned char CMD)
   Data >>= 3;//5bit
   TP_CS_1;
 
-  SPI.setClockDivider(SPI_CLOCK_DIV2);
-  SPI.begin();
+  // SPI.setClockDivider(SPI_CLOCK_DIV2);
+  // SPI.begin();
 
   return Data;
 }
@@ -130,6 +130,10 @@ static void TP_Scan()
   } else {  // NOT PRESSED
     isPressed = false;
   }
+
+  SPI.transfer(0x2C);  // Magik Code (0x2C or 0x2B), without this the touch screen will crash.
+  // I have checked the manual, and have no idea how this could be affecting the touch screen
+  // since the touch screen is already unattached (disabled) earlier in the TP_CS_1; (digitalWrite(TP_CS, HIGH))
 }
 
 
@@ -231,7 +235,14 @@ void Demo3_Loop()
   // LCD_WriteData(Ystart & 0xff );
   // LCD_WriteData((Yend - 1) >> 8);
   // LCD_WriteData((Yend - 1) & 0xff);
-  LCD_WriteReg(0x2C);  // HERE
+  // LCD_WriteReg(0x2C);  // HERE
+
+  // LCD_DC_0;
+  // LCD_CS_0;
+  // SPI4W_Write_Byte(0x2C);
+
+  // SPI.transfer(0x2C);
+  // LCD_CS_1;
 
 
 
