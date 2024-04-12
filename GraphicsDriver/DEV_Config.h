@@ -31,22 +31,10 @@
 #define LCD_DC_0		digitalWrite(LCD_DC, LOW)
 #define LCD_DC_1		digitalWrite(LCD_DC, HIGH)
 
-//Touch
-#define TP_CS 4
-#define TP_CS_0    digitalWrite(TP_CS, LOW)
-#define TP_CS_1    digitalWrite(TP_CS, HIGH)
-
 //SD
 #define SD_CS 5
 #define SD_CS_0   digitalWrite(LCD_CS, LOW)
 #define SD_CS_1    digitalWrite(LCD_CS, HIGH)
-
-//Touch (Additional)
-#define TP_IRQ 3
-#define GET_TP_IRQ    digitalRead(TP_IRQ)
-
-#define TP_BUSY 6
-#define GET_TP_BUSY    digitalRead(TP_BUSY)
 
 // // NON COMPILABLE
 // #define SPI4W_Write_Byte(__DATA) SPI.transfer(__DATA)
