@@ -4,29 +4,7 @@
 #include "GraphicsDriver/LCD_Bmp.h"
 // #include "GraphicsDriver/LCD_Touch.h"
 
-
-
-
-LENGTH LCD_Dis_Column;	//COLUMN
-LENGTH LCD_Dis_Page;	//PAGE
-
-POINT LCD_X_Adjust;		//LCD x actual display position calibration
-POINT LCD_Y_Adjust;		//LCD y actual display position calibration
-
 LCD_SCAN_DIR Lcd_ScanDir = U2D_R2L;    //SCAN_DIR_DFT = D2U_L2R
-
-POINT Xpoint0;
-POINT Ypoint0;
-POINT Xpoint;
-POINT Ypoint;
-
-unsigned char chStatus;
-unsigned char chType;
-
-int iXoff;
-int iYoff;
-float fXfac;
-float fYfac;
 
 #define READ_TIMES  5   //Number of readings
 #define LOST_NUM    1   //Discard value
@@ -126,37 +104,9 @@ static bool TP_Read_TwiceADC(unsigned int *pXCh_Adc, unsigned int  *pYCh_Adc )
   return false;
 }
 
-void TP_GetAdFac(void)
-{
-  if ( Lcd_ScanDir == D2U_L2R ) { //SCAN_DIR_DFT = D2U_L2R
-    fXfac = -0.132443F ;
-    fYfac = 0.089997F ;
-    iXoff = 516L ;
-    iYoff = -22L ;
-  } else if ( Lcd_ScanDir == L2R_U2D ) {
-    fXfac = 0.089697F ;
-    fYfac = 0.134792F ;
-    iXoff = -21L ;
-    iYoff = -39L ;
-  } else if ( Lcd_ScanDir == R2L_D2U ) {
-    fXfac = 0.089915F ;
-    fYfac =  0.133178F ;
-    iXoff = -22L ;
-    iYoff = -38L ;
-  } else if ( Lcd_ScanDir == U2D_R2L ) {
-    fXfac = -0.132906F ;
-    fYfac = 0.087964F ;
-    iXoff = 517L ;
-    iYoff = -20L ;
-  } else {
-    // LCD_Clear(LCD_BACKGROUND);
-    // GUI_DisString_EN(0, 60, "Does not support touch-screen \
-    //                     calibration in this direction",
-    //                  &Font16, FONT_BACKGROUND, RED);
-  }
-}
-
 bool isPressed = false;
+POINT Xpoint;
+POINT Ypoint;
 
 static void TP_Scan()
 {
@@ -165,14 +115,10 @@ static void TP_Scan()
     isPressed = true;
 
     TP_Read_TwiceADC(&Xpoint, &Ypoint);
-    // Serial.print(Xpoint);
-    // Serial.print(" ");
-    // Serial.print(Ypoint);
-    // Serial.print(" ");
 
+    // Calculation:
     // X: 3880 -> 320 (originalY)  3560 maps to 480;; 0.135x
     // Y: 280 -> 3780 (originalX)  3500 maps to 320;; 0.091x
-
     // So: newX = (originalY * -0.135f) + 523.8f
     // So: newY = (originalX * 0.091f) - 25.48f
 
@@ -180,12 +126,6 @@ static void TP_Scan()
     float YpointFloat = ((float)Xpoint * 0.091f) - 25.48f;
     Xpoint = (int16_t)XpointFloat;
     Ypoint = (int16_t)YpointFloat;
-
-    // Serial.print(Xpoint);
-    // Serial.print(" ");
-    // Serial.print(Ypoint);
-    // Serial.print(" ");
-    // Serial.print("\n");
 
   } else {  // NOT PRESSED
     isPressed = false;
@@ -213,16 +153,8 @@ static void TP_Scan()
 void Demo1_Setup()
 {
   System_Init();
-
-  // Serial.println("3.5inch TFT Touch Shield ShowBMP Demo");
-  // Serial.println("SD_Init ");
   SD_Init();
-
-  // Serial.println("LCD Init ");
-  LCD_SCAN_DIR Lcd_ScanDir = SCAN_DIR_DFT;
   LCD_Init(Lcd_ScanDir, 200);
-
-  // Serial.println("LCD_Clear ");
   LCD_Clear(LCD_BACKGROUND);
 
   LCD_ShowBMP();
@@ -236,29 +168,19 @@ void Demo1_Loop()
 void Demo2_Setup()
 {
   System_Init();
-
-  // Serial.println("3.5inch　TFT　Touch Shiled LCD Show...");  
-  // Serial.println("LCD Init...");
-  LCD_SCAN_DIR Lcd_ScanDir = SCAN_DIR_DFT;  
-  LCD_Init( Lcd_ScanDir, 200);
-
-  // Serial.println("LCD_Clear...");
+  LCD_Init(Lcd_ScanDir, 200);
   LCD_Clear(LCD_BACKGROUND);
 
-  // Serial.println("LCD_Show...");
   GUI_Show();
-
-  // Show the time
   DEV_TIME sDev_time;
   sDev_time.Hour = 23;
   sDev_time.Min = 38;
   sDev_time.Sec = 56;
 
-  // Serial.print("Show time\r\n");
   for (int i = 0; i < 10; i++) {
     sDev_time.Sec++;
     GUI_Showtime(200, 150, 327, 197, &sDev_time, RED);
-    Driver_Delay_ms(1000);//Analog clock 1s
+    Driver_Delay_ms(1000);  //Analog clock 1s
     if (sDev_time.Sec == 60)
       sDev_time.Sec = 0;
   }
@@ -272,42 +194,15 @@ void Demo2_Loop()
 void Demo3_Setup()
 {
   Serial.begin(115200);
-
   Serial.println("Init...");
   
   System_Init();
-
-  // Serial.println("3.5inch　TFT　Touch Shiled LCD Show...");   
   LCD_Init( Lcd_ScanDir, 200);
-
-  // Serial.println("LCD_Clear...");
   LCD_Clear(LCD_BACKGROUND);
-
-  //Get GRAM and LCD width and height
-  if(Lcd_ScanDir == L2R_U2D || Lcd_ScanDir == L2R_D2U || Lcd_ScanDir == R2L_U2D || Lcd_ScanDir == R2L_D2U) {
-      LCD_Dis_Column	= LCD_HEIGHT ;
-      LCD_Dis_Page = LCD_WIDTH ;
-  } else {
-      LCD_Dis_Column	= LCD_WIDTH ;
-      LCD_Dis_Page = LCD_HEIGHT ;
-  }
-
-  // // Serial.println("3.5inch TFT Touch Shield Touch Demo");
-  // // Serial.println("Init...");
-  // // LCD_Lcd_ScanDir Lcd_ScanDir = U2D_R2L;    //Lcd_ScanDir_DFT = D2U_L2R
-  // LCD_Init( Lcd_ScanDir, 200);  
-
-  // // Serial.println("Init Touch Pad...");
-  // TP_Init( Lcd_ScanDir );
-  // TP_GetAdFac();
-  // TP_Dialog();
-
-  // // Serial.println("Drawing...");
 }
 
 void Demo3_Loop()
 {
-  TP_GetAdFac();
   TP_Scan();
 
   GUI_DrawPoint(Xpoint, Ypoint,
@@ -320,8 +215,6 @@ void Demo3_Loop()
                 BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
   GUI_DrawPoint(Xpoint, Ypoint,
                 BLACK , DOT_PIXEL_2X2, DOT_FILL_RIGHTUP);
-
-  // TP_DrawBoard();
 }
 
 void setup(){

@@ -18,36 +18,7 @@
 extern LCD_DIS sLCD_DIS;
 static TP_DEV sTP_DEV;
 static TP_DRAW sTP_Draw;
-/*******************************************************************************
-  function:
-        Read the ADC of the channel
-  parameter:
-    Channel_Cmd :   0x90: Read channel Y +, select the ADC resolution is 12 bits, set to differential mode
-                    0xd0: Read channel x +, select the ADC resolution is 12 bits, set to differential mode
-*******************************************************************************/
-static unsigned int TP_Read_ADC(unsigned char CMD)
-{
-  unsigned int Data = 0;
 
-  SPI.setClockDivider(SPI_CLOCK_DIV8);
-  SPI.begin();
-
-  TP_CS_0;
-
-  SPI4W_Write_Byte(CMD);
-  Driver_Delay_us(200);
-
-  Data = SPI4W_Read_Byte(0XFF);
-  Data <<= 8;//7bit
-  Data |= SPI4W_Read_Byte(0XFF);
-  Data >>= 3;//5bit
-  TP_CS_1;
-
-  SPI.setClockDivider(SPI_CLOCK_DIV2);
-  SPI.begin();
-
-  return Data;
-}
 
 /*******************************************************************************
   function:
