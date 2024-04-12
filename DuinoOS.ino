@@ -32,10 +32,39 @@ void Demo1_Setup()
   }
 }
 
+uint8_t fread8(){
+  return file.read();
+}
+
+uint16_t fread16(){
+  return (file.read() << 8) | file.read();
+}
+
+uint32_t fread32(){
+  return (file.read() << 24) | (file.read() << 16) |
+         (file.read() << 8 ) | (file.read()      ) ;
+}
+
 void Demo1_Loop()
 {
-  // Read byte by byte from the file
+  // Read byte by byte from the file, while file.available().
   while (file.available()) {
+
+    // BMP Header
+    file.read();  // Magic Code: 'B'
+    file.read();  // Magic Code: 'M'
+    file.read();file.read();file.read();file.read();  // uint32_t size;
+    file.read();file.read();  // uint16_t reserved1;
+    file.read();file.read();  // uint16_t reserver2;
+    file.read();file.read();file.read();file.read();  // uint32_t offset;
+
+    // BMP Info Header
+    file.read();file.read();file.read();file.read();  // uint32_t size
+    file.read();file.read();file.read();file.read();  // uint32
+
+
+    uint8_t data = file.read();
+
     // Read a byte
     uint8_t data = file.read();
     
@@ -96,13 +125,13 @@ void Demo3_Loop()
 }
 
 void setup(){
-  // Demo1_Setup();
-  Demo2_Setup();
-  Demo3_Setup();
+  Demo1_Setup();
+  // Demo2_Setup();
+  // Demo3_Setup();
 }
 
 void loop(){
-  // Demo1_Loop();
-  Demo2_Loop();
-  Demo3_Loop();
+  Demo1_Loop();
+  // Demo2_Loop();
+  // Demo3_Loop();
 }
