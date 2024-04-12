@@ -9,7 +9,7 @@
 #include "MiniDrivers/MiniTouch.cpp"
 
 #include "GraphicsDriver/DEV_Config.cpp"
-#include "GraphicsDriver/LCD_Bmp.cpp"
+// #include "GraphicsDriver/LCD_Bmp.cpp"
 #include "GraphicsDriver/LCD_Driver.cpp"
 #include "GraphicsDriver/LCD_GUI.cpp"
 

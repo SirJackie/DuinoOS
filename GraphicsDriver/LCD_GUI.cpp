@@ -561,8 +561,7 @@ void GUI_Show(void)
     GUI_DrawCircle(sLCD_DIS.LCD_Dis_Column - 50, 250, 30, CYAN, DRAW_FULL, DOT_PIXEL_DFT);
 
     // DEBUG("Display String\r\n");
-    GUI_DisString_EN(80, 80, "WaveShare Electronic", &Font16, LCD_BACKGROUND, BLUE);
-    GUI_DisString_EN(80, 120, "3.5inch TFTLCD", &Font16, RED, BLUE);
+    
 
     // DEBUG("Display Nummber\r\n");
     GUI_DisNum(80, 150, 1234567890, &Font16, LCD_BACKGROUND, BLUE);
