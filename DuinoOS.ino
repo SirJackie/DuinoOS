@@ -138,77 +138,84 @@ void Demo1_Setup()
   //   Serial.println((int)myFile.read());
   // }
 
+  for(int i = 0; i < 100; i++){
+    char byteRead = (int)myFile.read();
+    byteRead < 16 ? Serial.print("0") : NULL;
+    Serial.print(byteRead, HEX);
+    Serial.print(" ");
+  }
+
   
 
-  // LCD_ShowBMP();
+  // // LCD_ShowBMP();
 
-  if (! ReadBmpHeader(myFile)) {
-    // ERROR BMP FORMAT
-    ;
-  }
+  // if (! ReadBmpHeader(myFile)) {
+  //   // ERROR BMP FORMAT
+  //   ;
+  // }
 
-  // LCD_DrawBmp(0, 0);
-
-
-  myFile.seek( BMP_Dis.Index);
-  uint16_t BuffPixel =  BMP_Dis.BMP_Width / 4;
-  uint16_t X_Point = (uint16_t)0;
-  uint16_t Y_Point = (uint16_t)0;
-
-  uint8_t ReadBuff[BUFFPIXEL_X3(BuffPixel)];
-  //clear buffer
-  for (uint16_t N = 0; N < BUFFPIXEL_X3(BuffPixel); N++) {
-    ReadBuff[N] = 0;
-  }
+  // // LCD_DrawBmp(0, 0);
 
 
+  // myFile.seek( BMP_Dis.Index);
+  // uint16_t BuffPixel =  BMP_Dis.BMP_Width / 4;
+  // uint16_t X_Point = (uint16_t)0;
+  // uint16_t Y_Point = (uint16_t)0;
+
+  // uint8_t ReadBuff[BUFFPIXEL_X3(BuffPixel)];
+  // //clear buffer
+  // for (uint16_t N = 0; N < BUFFPIXEL_X3(BuffPixel); N++) {
+  //   ReadBuff[N] = 0;
+  // }
 
 
 
 
-  LCD_SetWindow(0, 0, 480, 320);
 
-  LCD_DC_1;
-  LCD_CS_0;
 
-  for(int y = 0; y < 320; y++){
-    for(int x = 0; x < 480; x++){
-      // myFile.read(ReadBuff, BUFFPIXEL_X3(BuffPixel));
+  // LCD_SetWindow(0, 0, 480, 320);
 
-      // Serial.println((int)ReadBuff[0]);
-      // Serial.println((int)ReadBuff[1]);
-      // Serial.println((int)ReadBuff[2]);
+  // LCD_DC_1;
+  // LCD_CS_0;
 
-      // DrawPixel(
-      //   x, y,
-      //   RGB24TORGB16( ReadBuff[2], ReadBuff[1], ReadBuff[0])
-      // );
+  // for(int y = 0; y < 320; y++){
+  //   for(int x = 0; x < 480; x++){
+  //     // myFile.read(ReadBuff, BUFFPIXEL_X3(BuffPixel));
 
-      int x2 = x % 128;
-      int y2 = y % 128;
+  //     // Serial.println((int)ReadBuff[0]);
+  //     // Serial.println((int)ReadBuff[1]);
+  //     // Serial.println((int)ReadBuff[2]);
 
-      unsigned char r = clampChannel(255 - 2*x2);
-      unsigned char g = clampChannel(2*y2);
+  //     // DrawPixel(
+  //     //   x, y,
+  //     //   RGB24TORGB16( ReadBuff[2], ReadBuff[1], ReadBuff[0])
+  //     // );
 
-      // Serial.print("X: ");
-      // Serial.print(x);
-      // Serial.print("; Y: ");
-      // Serial.print(y);
-      // Serial.print("; R: ");
-      // Serial.print((unsigned int)r);
-      // Serial.print("; G: ");
-      // Serial.print((unsigned int)g);
-      // Serial.print("\n");
+  //     int x2 = x % 128;
+  //     int y2 = y % 128;
 
-      COLOR color = RGB24TORGB16(r, g, 0);
+  //     unsigned char r = clampChannel(255 - 2*x2);
+  //     unsigned char g = clampChannel(2*y2);
 
-      SPI4W_Write_Byte(color >> 8);
-      SPI4W_Write_Byte(color & 0XFF);
+  //     // Serial.print("X: ");
+  //     // Serial.print(x);
+  //     // Serial.print("; Y: ");
+  //     // Serial.print(y);
+  //     // Serial.print("; R: ");
+  //     // Serial.print((unsigned int)r);
+  //     // Serial.print("; G: ");
+  //     // Serial.print((unsigned int)g);
+  //     // Serial.print("\n");
+
+  //     COLOR color = RGB24TORGB16(r, g, 0);
+
+  //     SPI4W_Write_Byte(color >> 8);
+  //     SPI4W_Write_Byte(color & 0XFF);
       
-    }
-  }
+  //   }
+  // }
 
-  LCD_CS_1;
+  // LCD_CS_1;
 
   // Close the file
   myFile.close();
