@@ -216,8 +216,46 @@ void Demo3_Loop()
 
   Serial.println("Milestone 2");
 
-  LCD_SetCursor(Xpoint, Ypoint);
-  LCD_SetColor(BLACK, 1, 1);
+  int16_t Xstart = Xpoint, Ystart = Ypoint, Xend = Xpoint, Yend=Ypoint;
+
+  //set the X coordinates
+  LCD_WriteReg(0x2A);
+  LCD_WriteData(Xstart >> 8);	 				//Set the horizontal starting point to the high octet
+  LCD_WriteData(Xstart & 0xff);	 				//Set the horizontal starting point to the low octet
+  LCD_WriteData((Xend - 1) >> 8);	//Set the horizontal end to the high octet
+  LCD_WriteData((Xend - 1) & 0xff);	//Set the horizontal end to the low octet
+
+  //set the Y coordinates
+  LCD_WriteReg(0x2B);
+  LCD_WriteData(Ystart >> 8);
+  LCD_WriteData(Ystart & 0xff );
+  LCD_WriteData((Yend - 1) >> 8);
+  LCD_WriteData((Yend - 1) & 0xff);
+  LCD_WriteReg(0x2C);
+
+
+
+
+  // LCD_SetWindow(Xpoint, Ypoint, Xpoint, Ypoint);
+  // LCD_SetColor(BLACK, 1, 1);
+  // LCD_Write_AllData(BLACK , (uint32_t)Xpoint * (uint32_t)Ypoint);
+
+  uint16_t Data = BLACK;
+  uint32_t DataLen = 1;
+
+  uint32_t i;
+  LCD_DC_1;
+  LCD_CS_0;
+  for(i = 0; i < DataLen; i++) {
+      SPI4W_Write_Byte(Data >> 8);
+      SPI4W_Write_Byte(Data & 0XFF);
+  }
+  LCD_CS_1;
+
+
+  
+
+
 
   Serial.println("Milestone 3");
 }
