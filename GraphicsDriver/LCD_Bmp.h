@@ -14,9 +14,8 @@
 #ifndef __LCD_BMP_H__
 #define __LCD_BMP_H__
 
-#include "DEV_Config.h"
-#include "LCD_Driver.h"
-#include "LCD_GUI.h"
+#include "../MiniDrivers/MiniInfrastructure.h"
+#include "../MiniDrivers/MiniGraphics.h"
 
 #define MAX_BMP         10                      // bmp file num
 #define FILENAME_LEN    20                      // max file name length
@@ -35,5 +34,3 @@ void SD_Init(void);
 void LCD_ShowBMP(void);
 
 #endif
-
-

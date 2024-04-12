@@ -17,7 +17,6 @@
 #include "LCD_Bmp.h"
 
 BMP_DIS BMP_Dis;
-extern LCD_DIS sLCD_DIS;
 
 char BMP_File[BMP_NUM][FILENAME_LEN] =           // add file name here
 {
@@ -79,10 +78,10 @@ static boolean ReadBmpHeader(File f)
   BMP_Dis.BMP_Width = Read32(f);//12-15:Image wide
   BMP_Dis.BMP_Height = Read32(f);//16-19:Image high
 
-  if (BMP_Dis.BMP_Width != sLCD_DIS.LCD_Dis_Column || BMP_Dis.BMP_Height != sLCD_DIS.LCD_Dis_Page)  {   // if image is not 480*320, return false
-    // DEBUG("BMP is not 480*320");
-    return false;
-  }
+  // if (BMP_Dis.BMP_Width != sLCD_DIS.LCD_Dis_Column || BMP_Dis.BMP_Height != sLCD_DIS.LCD_Dis_Page)  {   // if image is not 480*320, return false
+  //   // DEBUG("BMP is not 480*320");
+  //   return false;
+  // }
 
   if (Read16(f) != 1)//1A-1B :0 for the use of the palette, 1 for the number of color indices
     return false;
@@ -143,17 +142,7 @@ static void LCD_DrawBmp( int x, int y)
 **************************************************************************/
 void SD_Init(void) 
 {
-  SD_CS_1;
-  LCD_CS_1;
-  TP_CS_1;
-
-  Sd2Card card;
-  card.init(SPI_FULL_SPEED, SD_CS);
-  if (!SD.begin( SD_CS ))  {
-    // DEBUG("SD init failed!");
-    while (1);                              // init fail, die here
-  }
-  // DEBUG("SD init OK!");
+  
 }
 
 void LCD_ShowBMP(void) 
@@ -175,10 +164,8 @@ void LCD_ShowBMP(void)
       continue;
     }
 
-    LCD_SetGramScanWay(D2U_R2L);
     LCD_DrawBmp(0, 0);
     bmpFile.close();
-    LCD_SetGramScanWay(SCAN_DIR_DFT);
     
     delay(1000);
     delay(1000);
