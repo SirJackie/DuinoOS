@@ -205,6 +205,8 @@ void Demo3_Loop()
 {
   TP_Scan();
 
+  Serial.println("Milestone 1");
+
   if (isPressed) {
     Serial.print(Xpoint);
     Serial.print(" ");
@@ -212,16 +214,20 @@ void Demo3_Loop()
     Serial.print("\n");
   }
 
-  GUI_DrawPoint(Xpoint, Ypoint,
-                BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
-  GUI_DrawPoint(Xpoint + 1, Ypoint,
-                BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
-  GUI_DrawPoint(Xpoint, Ypoint + 1,
-                BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
-  GUI_DrawPoint(Xpoint + 1, Ypoint + 1,
-                BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
-  GUI_DrawPoint(Xpoint, Ypoint,
-                BLACK , DOT_PIXEL_2X2, DOT_FILL_RIGHTUP);
+  Serial.println("Milestone 2");
+
+  // GUI_DrawPoint(Xpoint, Ypoint,
+  //               BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
+  // GUI_DrawPoint(Xpoint + 1, Ypoint,
+  //               BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
+  // GUI_DrawPoint(Xpoint, Ypoint + 1,
+  //               BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
+  // GUI_DrawPoint(Xpoint + 1, Ypoint + 1,
+  //               BLACK , DOT_PIXEL_1X1, DOT_FILL_RIGHTUP);
+  // GUI_DrawPoint(Xpoint, Ypoint,
+  //               BLACK , DOT_PIXEL_2X2, DOT_FILL_RIGHTUP);
+
+  Serial.println("Milestone 3");
 }
 
 void setup(){
