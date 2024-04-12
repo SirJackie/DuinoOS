@@ -288,17 +288,72 @@ void Demo3_Loop()
   DrawPixel(Xpoint, Ypoint, BLACK);
 }
 
+File file;
+
 void setup(){
   Serial.begin(115200);
   Serial.println("Init...");
 
-  Demo1_Setup();
+
+  // LCD_Init();
+  // LCD_Clear(WHITE);
+
+  // SD_Init();
+
+  SD_CS_1;
+  LCD_CS_1;
+  TP_CS_1;
+
+  Sd2Card card;
+  card.init(SPI_FULL_SPEED, SD_CS);
+  if (!SD.begin( SD_CS ))  {
+    Serial.println("SD init failed!");
+    while (1);                              // init fail, die here
+  }
+  Serial.println("SD init OK!");
+
+  // Open the file
+  file = SD.open("hamster.bmp", FILE_READ);
+  if (!file) {
+    Serial.println("Failed to open file for reading!");
+    return;
+  }
+
+  // Demo1_Setup();
   // Demo2_Setup();
   // Demo3_Setup();
 }
 
+char counter = 0;
+
 void loop(){
-  Demo1_Loop();
+
+  // Read byte by byte from the file
+  while (file.available()) {
+    // Read a byte
+    uint8_t data = file.read();
+    
+    // Print the byte in hexadecimal format
+    if (data < 0x10) {
+      Serial.print("0"); // Print leading zero for single-digit values
+    }
+    Serial.print(data, HEX);
+    Serial.print(" ");
+
+    counter++;
+    if (counter == 16){
+      counter -= 16;
+      Serial.print("\n");
+    }
+  }
+  
+  // Close the file
+  file.close();
+  
+  // Stop the loop
+  while (true) {}
+
+  // Demo1_Loop();
   // Demo2_Loop();
   // Demo3_Loop();
 }
