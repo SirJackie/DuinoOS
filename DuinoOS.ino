@@ -227,6 +227,14 @@ void Demo3_Loop()
   // GUI_DrawPoint(Xpoint, Ypoint,
   //               BLACK , DOT_PIXEL_2X2, DOT_FILL_RIGHTUP);
 
+  LCD_SetPointlColor(Xpoint, Ypoint, BLACK);
+    LCD_SetPointlColor(Xpoint, Ypoint, BLACK);
+      LCD_SetPointlColor(Xpoint, Ypoint, BLACK);
+        LCD_SetPointlColor(Xpoint, Ypoint, BLACK);
+          LCD_SetPointlColor(Xpoint, Ypoint, BLACK);
+
+  Driver_Delay_us(500);
+
   Serial.println("Milestone 3");
 }
 
