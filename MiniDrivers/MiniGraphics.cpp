@@ -210,7 +210,7 @@ void LCD_Init(){
   LCD_WriteReg(0x29);
 }
 
-static void LCD_SetWindow(uint16_t Xstart, uint16_t Ystart,	uint16_t Xend, uint16_t Yend)
+void LCD_SetWindow(uint16_t Xstart, uint16_t Ystart,	uint16_t Xend, uint16_t Yend)
 {
     //set the X coordinates
     LCD_WriteReg(0x2A);
@@ -232,7 +232,7 @@ static void LCD_SetWindow(uint16_t Xstart, uint16_t Ystart,	uint16_t Xend, uint1
 function:
 		Write register data
 *******************************************************************************/
-static void LCD_Write_AllData(uint16_t Data, uint32_t DataLen)
+void LCD_Write_AllData(uint16_t Data, uint32_t DataLen)
 {
     uint32_t i;
     LCD_DC_1;
@@ -245,7 +245,7 @@ static void LCD_Write_AllData(uint16_t Data, uint32_t DataLen)
 }
 
 void LCD_Clear(COLOR color){
-  LCD_SetWindow(0, 0, LCD_WIDTH, LCD_HEIGHT);
+  LCD_SetWindow(0, 0, LCD_WIDTH - 1, LCD_HEIGHT - 1);
   LCD_Write_AllData(color, LCD_LENGTH);
 }
 

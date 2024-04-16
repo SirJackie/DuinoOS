@@ -3,7 +3,7 @@
 
 // Variables and Functions
 extern bool isPressed;
-extern int16_t Xpoint, Ypoint;
+extern uint16_t Xpoint, Ypoint;
 void Touch();
 void Touch_Init();
 

@@ -80,7 +80,7 @@ static void TP_Read_ADC_XY(unsigned int *pXCh_Adc, unsigned int  *pYCh_Adc )
 }
 
 #define ERR_RANGE 50    //tolerance scope
-static bool TP_Read_TwiceADC(unsigned int *pXCh_Adc, unsigned int  *pYCh_Adc )
+static bool TP_Read_TwiceADC(uint16_t *pXCh_Adc, uint16_t *pYCh_Adc)
 {
   unsigned int XCh_Adc1, YCh_Adc1, XCh_Adc2, YCh_Adc2;
 
@@ -109,14 +109,14 @@ static bool TP_Read_TwiceADC(unsigned int *pXCh_Adc, unsigned int  *pYCh_Adc )
 */
 
 bool isPressed = false;
-int16_t Xpoint;
-int16_t Ypoint;
+uint16_t Xpoint;
+uint16_t Ypoint;
 
 /*
 ** Public Functions
 */
 
-static void Touch()
+void Touch()
 {
   //In X, Y coordinate measurement, IRQ is disabled and output is low
   if (!digitalRead(TP_IRQ)) {  // PRESSED
@@ -144,7 +144,7 @@ static void Touch()
   // since the touch screen is already unattached (disabled) earlier in the TP_CS_1; (digitalWrite(TP_CS, HIGH))
 }
 
-static void Touch_Init() {
+void Touch_Init() {
   pinMode(TP_CS, OUTPUT);
   pinMode(TP_IRQ, INPUT);
   digitalWrite(TP_IRQ, HIGH);
